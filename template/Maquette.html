@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Groupie tracker</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.2.1/dist/css/axentix.min.css">
+    <link rel="stylesheet" href="assets\style\maquette.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+
+</head>
+
+<body class="layout with-sidenav fixed-sidenav under-navbar data-axentix">
+    <header>
+        <div class="navbar-fixed">
+            <nav class="navbar magenta dark-5 shadow-1 primary">
+                <a href="#" target="_blank" id="LogoGT" class="navbar-brand">Groupie Tracker</a>
+                <div class="navbar-menu ml-auto">
+
+                    <!-- barre de rechercher -->
+
+
+
+                    <!-- <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;"> -->
+                    <div class="form-control">
+
+                        <div class="searchauto">
+                            <input type="text" placeholder="Search..." spellcheck="false" aria-expanded="false" aria-label="search input" dir="auto" style="position: relative; vertical-align: top;">
+                            <div class="autocomplete" style="    background: #ffffff; opacity: 0.8;">
+                                <li>AUTOCOMPLTE</li>
+                                <li>AUTOCOMPLTE</li>
+                                <li>AUTOCOMPLTE</li>
+                                <li>AUTOCOMPLTE</li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- fin barre de recherche -->
+
+
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="sidenav shadow-1 white" id="example-sidenav" data-ax="sidenav">
+        <div class="sidenav-header">
+            <button data-target="example-sidenav" class="sidenav-trigger"></button>
+        </div>
+
+        <!-- Boutons pour les filtres -->
+        <button data-target="example-collapsible" id="btnFiltre" class="btn rounded-1 press primary collapsible-trigger magenta dark-3">filtres</button>
+        <!-- Boutons pour les Filtres fin -->
+
+        <!-- menu des Filtres -->
+        <!-- <label for="size">Font Size:</label> -->
+        <div class="scroller">
+            <form method="POST" action="/">
+
+                <div class="collapsible" id="example-collapsible" data-ax="collapsible" style="padding: 2%;">
+                    <div class="primary white">
+
+
+                        <p>Les dates de concerts:</p>
+
+                        <div class="form-field form-default">
+                            <label class="form-switch mt-2">
+                                Cacher
+                                <input type="checkbox" name="artist-groupe"/>
+                                <span class="slider"></span>
+                                Afficher
+                            </label>
+                        </div>
+
+                        <br>
+
+                        <p>Date du premier album:</p>
+
+
+
+                        <div class="grix xs1 sm2" id="date">
+                            <div class="form-field">
+                                <input type="text" class="form-control rounded-1" placeholder="Entrer une date" name="date-a" />
+                            </div>
+                        </div>
+
+
+
+
+                        <p>Date de Création</p>
+
+                        <div class="grix xs1 sm2" id="date">
+                            <div class="form-field">
+                                <input type="text" id="name" class="form-control rounded-1" placeholder="Entrer une date" name="date-c" />
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <p>Nombre de membres:</p>
+                        <label id="membersSlider">0</label>
+                        <input type="range" value="0" max={{.MaxMembers}} name="members" oninput="num.value = this.value">
+                        <output id="num">0</output>
+
+                        <p>Nombre de ville joué:</p>
+                        <label id="membersSlider">0</label>
+                        <input type="range" value="0" max={{.MaxVilles}} name="villes" oninput="num1.value = this.value">
+                        <output id="num1">0</output>
+
+                        <br><br>
+
+                        <p>Ville(s) jouée(s):</p>
+
+                        <div class="form-field" id="selection">
+                            <label name="choix ville 1" class="txt-center" for="select">choix ville 1</label>
+                            <select class="form-control rounded-1" id="select" name="ville-1">
+                                {{range .ListeVilles}}
+                                <option>{{.}}</option>
+                                {{end}}
+                            </select>
+                        </div>
+
+                        <div class="form-field" id="selection">
+                            <label class="txt-center" for="select">choix ville 2</label>
+                            <select class="form-control rounded-1" id="select" name="ville-2">
+                                {{range .ListeVilles}}
+                                <option>{{.}}</option>
+                                {{end}}
+                            </select>
+                        </div>
+
+                        <div class="form-field" id="selection">
+                            <label class="txt-center" for="select">choix ville 3</label>
+                            <select class="form-control rounded-1" id="select" name="ville-3">
+                                {{range .ListeVilles}}
+                                <option>{{.}}</option>
+                                {{end}}
+                            </select>
+                        </div>
+
+                        <br>
+
+                        <button id="filtrer" class="btn rounded-1 primary press modal-trigger magenta dark-3" style="margin-left: 12%;">Filtrer !</button>
+
+                    </div>
+                </div>
+        </div>
+        </form>
+        <!-- menu des Filtres Fin -->
+
+        <!-- bouton de presentation -->
+        <button id="btn1" class="btn rounded-1 primary press modal-trigger magenta dark-3" data-target="modal-example">Présentation</button>
+        <!-- bouton de presentation fin -->
+
+        <!-- nom des createur -->
+        <button onclick="toast.show()" id="Createur1" class="btn shadow-1 rounded-1 primary small magenta dark-4">Créateurs</button>
+        <!-- nom des createur fin-->
+    </div>
+
+
+    <!-- boutons open menu -->
+    <button data-target="example-sidenav" id="btnMenu" class="btn  magenta dark-5
+    rounded-1 press primary sidenav-trigger"> Menu </button>
+    <!-- boutons open menu fin -->
+
+    {{if.Alert}}
+    <script type="text/javascript">
+        alert("Aucun résultat trouvé pour votre recherche. \nCependant cliquez sur ok pour découvrir les artises qui ont crées le site internet.")
+    </script>
+
+    {{end}}
+
+    <div class="grix xs1 sm2 md3 lg4 vstretch">
+        {{range .Artist}}
+        <div id={{.Id}} class="card shadow-1 hoverable-1 rounded-2 bd-orange bd-r-solid bd-l-solid bd-3 ">
+
+            <div class="card-image">
+                <img src={{.Image}} alt="logo" />
+                <!--fait // ici API l'image de l'artiste -->
+            </div>
+
+            <div class="card-header">{{.Name}}
+                <!--fait // vous mettrez ici l'api avec le nom-->
+            </div>
+            {{if .CreationDate}}
+            <div class="card-content">DATE D'APPARITION: <br><br> {{.CreationDate}}
+                <!--fait // vous mettrez ici l'api avec la date de creation-->
+            </div>
+            {{end}}
+            <div class="divider "></div>
+
+            <div class="card-content">{{if .CreationDate}}MEMBRES DU GROUPE:{{end}} <br><br>{{range .Members}}{{.}}<br>{{end}}
+                <!--fait // vous mettrez ici l'api avec les membres-->
+            </div>
+            {{if .Visible}}
+            <div class="divider"></div>
+            <div class="card-footer">DATE DES CONCERTS:<br><br>{{range $key,$value := .Relations}}{{$key}} : {{range $value}}{{.}}{{end}}<br>{{end}}
+                <!--flou // vous mettrez ici l'api avec les dates-->
+            </div>
+            {{end}}
+        </div>
+        {{end}}
+    </div>
+
+    <div class="modal shadow-1 white rounded-3" id="modal-example" data-ax="modal">
+        <div class="modal-header">
+            Bienvenue sur notre projet Groupie Tracker
+            <button data-target="modal-example" class="modal-trigger">
+                <i class="fas fa-times"></i> <!-- Use font awesome -->
+            </button>
+        </div>
+        <div class="modal-content">
+            Notre site internet Groupie Tracker permet d'obtenir des informations sur des artistes et groupes dans le domaine de la musique. Vous retrouverez une totalité de 52 groupes du musiques avec des informations sur:
+            <br><br> -leurs membres<br> -Date d'apparition<br> -Leurs albums<br> -Dates de concerts <br> -localisation
+            <br> Etc..
+            <br>
+            <br> Nous allons maintenant vous laissez découvrir ces merveilleux artistes du monde entier.
+
+            <div class="modal-footer">
+                Amusez-vous bien !
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axentix@1.2.1/dist/js/axentix.min.js"></script>
+
+        <script>
+            new Axentix('all');
+
+            let toast = new Axentix.Toast('FEKAIER Seif <br><br> FOURNIE William <br><br> TARHOUNI Mohamed amine <br><br> LEICHNIG Coriane', {
+                classes: 'secondary rounded-2 shadow-2',
+                isClosable: true
+            });
+        </script>
+
+        <script src="assets/js/script.js"></script>
+
+
+
+
+</body>
+
+</html>
